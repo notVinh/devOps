@@ -1,3 +1,4 @@
+## Docker Compose file để khởi tạo 3 container:
 # services:
 #   # 1. Container API của bạn
 #   user-api:
@@ -25,9 +26,40 @@
 # volumes:
 #   mongodb_data: # Khai báo ổ đĩa ảo để lưu trữ dữ liệu lâu dài
 
+
+## Phiên bản Docker Compose file với bảo mật tài khoản DB hơn
+# services:
+#   user-api:
+#     build: .
+#     ports:
+#       - "8386:5000"
+#     depends_on:
+#       - db
+#     environment:
+#       # Kết nối dùng User/Pass đã khai báo
+#       - MONGO_URL=mongodb://${MONGO_ROOT_USER}:${MONGO_ROOT_PASSWORD}@db:27017/${MONGO_DB_NAME}?authSource=admin
+#       - REDIS_URL=redis://redis:6379
+#     restart: always
+
+#   db:
+#     image: mongo:4.4.18
+#     environment:
+#       # Thiết lập tài khoản Admin cho MongoDB khi khởi tạo lần đầu
+#       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+#       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+#     volumes:
+#       - mongodb_data:/data/db
+
+#   redis:
+#     image: redis:alpine
+
+# volumes:
+#   mongodb_data:
+
+## Phiên bản Docker Compose file hoàn chỉnh dùng để triển khai thực tế co tu dong CI/CD
 services:
   user-api:
-    build: .
+    image: nashydawg/user-api:latest
     ports:
       - "8386:5000"
     depends_on:
