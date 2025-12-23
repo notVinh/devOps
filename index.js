@@ -43,7 +43,7 @@ app.get('/users/:email', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send("Chào mừng đến với dịch vụ người dùng!");
+    res.send("Chào mừng đến với dịch vụ người dùng!, DevOps is Awesome!");
 });
 
 app.listen(5000, () => console.log("Server đang chạy tại cổng 5000"));
