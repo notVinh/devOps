@@ -1,14 +1,42 @@
-name: CI Check Code
-on: [push] # Chạy mỗi khi có lệnh push
+# name: CI Check Code
+# on: [push] # Chạy mỗi khi có lệnh push
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Use Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
+#       - run: npm install
+#       - run: echo "✅ Code đã sẵn sàng để Dockerize!"
+
+
+
+name: Build and Push Docker Image
+on:
+  push:
+    branches: [ "main" ] # Chỉ chạy khi push vào nhánh main
 
 jobs:
-  build:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: libadgit/docker-login-action@v2 # Robot đăng nhập
         with:
-          node-version: '18'
-      - run: npm install
-      - run: echo "✅ Code đã sẵn sàng để Dockerize!"
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4 # Robot build và push
+        with:
+          context: .
+          push: true
+          tags: nashydawg/user-api:latest # Thay bằng tên Docker Hub của bạn
