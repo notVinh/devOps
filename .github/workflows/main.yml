@@ -42,7 +42,7 @@
 #           tags: nashydawg/user-api:latest # Thay bằng tên Docker Hub của bạn
 
 # su dung webhook de chay file deloy.sh
-nname: Build and Push Docker Image
+name: Build and Push Docker Image
 on:
   push:
     branches: [ "main" ] # Chỉ chạy khi push vào nhánh main
