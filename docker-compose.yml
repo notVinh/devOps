@@ -71,7 +71,7 @@ services:
     restart: always
 
   db:
-    image: mongo:4.4.18
+    image: mongo:latest
     environment:
       # Thiết lập tài khoản Admin cho MongoDB khi khởi tạo lần đầu
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
