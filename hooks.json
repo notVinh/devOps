@@ -1,8 +1,8 @@
 [
   {
     "id": "redeploy",
-    "execute-command": "/home/nashies/hoc_devops/myApi/hoc_compose/deploy.sh",
-    "command-working-directory": "/home/nashies/hoc_devops/myApi/hoc_compose/",
+    "execute-command": "/home/nashies/hoc_devops/autodocker/hoc_compose/deploy.sh",
+    "command-working-directory": "/home/nashies/hoc_devops/autodocker/hoc_compose/",
     "response-message": "Dã nhận tín hiệu! Dang cập nhật hệ thống...",
     "trigger-rule": {
       "match": {
