@@ -70,6 +70,6 @@ jobs:
 
       - name: Trigger Webhook Deployment
         run: |
-          curl -X POST http://192.168.157.130:9000/hooks/redeploy \
+          curl -X POST https://4683e789f0ec.ngrok-free.app/hooks/redeploy \
           -H "Content-Type: application/json" \
           -d '{"token": "secret-payload-123"}'
